@@ -1,0 +1,515 @@
+@layer theme, base, frosted_ui, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "@whop/react/styles.css" layer(frosted_ui);
+
+/* biome-ignore lint/suspicious/noUnknownAtRules: this rule is imported from whop */
+@config '../tailwind.config.ts';
+
+/* ============================================
+   UNIVERSAL CLOTHING EXCHANGE - DESIGN SYSTEM
+   Sustainable, Earthy, Natural Color Palette
+   ============================================ */
+
+:root {
+	/* Base Colors - Clean & Natural */
+	--background: 42 33% 97%;              /* Warm off-white #f9f7f4 */
+	--foreground: 20 25% 20%;              /* Deeper earth brown #372e28 - Better contrast */
+	
+	/* Primary Brand - Sage Green (Sustainability) */
+	--primary: 142 35% 45%;                /* Sage green #4a8a62 */
+	--primary-foreground: 0 0% 100%;       /* White text on primary */
+	
+	/* Secondary Accent - Terracotta/Clay */
+	--secondary: 18 60% 60%;               /* Warm terracotta #d98960 */
+	--secondary-foreground: 20 25% 20%;    /* Dark text on secondary */
+	
+	/* Muted/Subtle Elements */
+	--muted: 40 25% 92%;                   /* Light beige #f2ede6 */
+	--muted-foreground: 25 20% 40%;        /* Darker brown #6b5d50 - Better contrast */
+	
+	/* Accent Highlights - Soft Earth Tones */
+	--accent: 45 40% 88%;                  /* Soft sand #eae4d6 */
+	--accent-foreground: 142 35% 35%;      /* Deep sage for accent text */
+	
+	/* Destructive/Error States */
+	--destructive: 10 70% 55%;             /* Natural red-clay #c95945 */
+	--destructive-foreground: 0 0% 100%;   /* White on red */
+	
+	/* Success States - Deep Green */
+	--success: 142 45% 40%;                /* Forest green #3a7550 */
+	--success-foreground: 0 0% 100%;       /* White on green */
+	
+	/* Warning States - Amber/Honey */
+	--warning: 38 85% 55%;                 /* Warm amber #e4a336 */
+	--warning-foreground: 20 25% 20%;      /* Dark text on amber */
+	
+	/* Borders & Separators */
+	--border: 40 20% 85%;                  /* Soft beige border #dcd6cc */
+	--input: 40 20% 85%;                   /* Input border */
+	--ring: 142 35% 45%;                   /* Focus ring (sage green) */
+	
+	/* Card Backgrounds */
+	--card: 0 0% 100%;                     /* Pure white cards */
+	--card-foreground: 20 25% 20%;         /* Dark text on cards */
+	
+	/* Popover/Modal Backgrounds */
+	--popover: 0 0% 100%;
+	--popover-foreground: 20 25% 20%;
+	
+	/* Border Radius */
+	--radius: 0.5rem;                      /* 8px rounded corners */
+}
+
+/* Dark Mode Support (Future Enhancement) */
+.dark {
+	--background: 20 20% 12%;              /* Deep earth brown */
+	--foreground: 42 33% 95%;              /* Warm off-white */
+	
+	--primary: 142 40% 50%;                /* Brighter sage */
+	--primary-foreground: 0 0% 100%;
+	
+	--secondary: 18 60% 65%;               /* Lighter terracotta */
+	--secondary-foreground: 20 20% 15%;
+	
+	--muted: 25 15% 20%;                   /* Dark brown-gray */
+	--muted-foreground: 40 15% 65%;
+	
+	--accent: 142 30% 25%;                 /* Dark sage */
+	--accent-foreground: 142 35% 80%;
+	
+	--destructive: 10 70% 55%;
+	--destructive-foreground: 0 0% 100%;
+	
+	--success: 142 45% 50%;
+	--success-foreground: 0 0% 100%;
+	
+	--warning: 38 85% 60%;
+	--warning-foreground: 20 20% 15%;
+	
+	--border: 25 15% 25%;
+	--input: 25 15% 25%;
+	--ring: 142 40% 50%;
+	
+	--card: 20 20% 15%;
+	--card-foreground: 42 33% 95%;
+	
+	--popover: 20 20% 15%;
+	--popover-foreground: 42 33% 95%;
+}
+
+/* Global Base Styles */
+* {
+	border-color: hsl(var(--border));
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: hsl(var(--background));
+	color: hsl(var(--foreground));
+	font-family: var(--font-geist-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
+	font-feature-settings: "rlig" 1, "calt" 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   PROFESSIONAL SPACING SYSTEM
+   Based on 8-Point Grid for Consistency
+   ============================================ */
+
+/* Safe Area Support for Mobile */
+.safe-area-bottom {
+	padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+/* Professional Spacing Utilities - Using standard CSS */
+.section-spacing {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+	.section-spacing {
+		padding-top: 4rem;
+		padding-bottom: 4rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.section-spacing {
+		padding-top: 5rem;
+		padding-bottom: 5rem;
+	}
+}
+
+.card-spacing {
+	padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+	.card-spacing {
+		padding: 2rem;
+	}
+}
+
+.container-spacing {
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+	.container-spacing {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.container-spacing {
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+}
+
+/* Typography Scale with Proper Line Height */
+.heading-xl {
+	font-size: 2.25rem;
+	font-weight: 700;
+	letter-spacing: -0.025em;
+	line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+	.heading-xl {
+		font-size: 3rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.heading-xl {
+		font-size: 3.75rem;
+	}
+}
+
+.heading-lg {
+	font-size: 1.875rem;
+	font-weight: 700;
+	letter-spacing: -0.025em;
+	line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+	.heading-lg {
+		font-size: 2.25rem;
+	}
+}
+
+.heading-md {
+	font-size: 1.5rem;
+	font-weight: 600;
+	letter-spacing: -0.025em;
+	line-height: 1.25;
+}
+
+@media (min-width: 768px) {
+	.heading-md {
+		font-size: 1.875rem;
+	}
+}
+
+.heading-sm {
+	font-size: 1.25rem;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+@media (min-width: 768px) {
+	.heading-sm {
+		font-size: 1.5rem;
+	}
+}
+
+.body-lg {
+	font-size: 1.125rem;
+	line-height: 1.6;
+}
+
+.body-md {
+	font-size: 1rem;
+	line-height: 1.6;
+}
+
+.body-sm {
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+
+/* Button Sizing with Proper Touch Targets - WCAG 2.1 Level AAA */
+.btn-touch-target {
+	min-height: 44px;
+	min-width: 44px;
+}
+
+/* Focus States for Accessibility */
+.focus-ring {
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+}
+
+.focus-ring:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 2px hsl(var(--ring)), 0 0 0 4px hsl(var(--ring) / 0.1);
+}
+
+/* Card Hover Effects */
+.card-interactive {
+	transition: all 0.2s ease;
+}
+
+.card-interactive:hover {
+	box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+	transform: translateY(-2px);
+}
+
+/* ============================================
+   GLASS MORPHISM EFFECTS
+   ============================================ */
+
+/* Frosted Glass Effect */
+.glass {
+	background: rgba(255, 255, 255, 0.7);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+	background: rgba(55, 46, 40, 0.7);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Clear Glass Effect */
+.glass-clear {
+	background: rgba(255, 255, 255, 0.9);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	border: 1px solid rgba(220, 214, 204, 0.5);
+}
+
+/* Heavy Frosted Glass */
+.glass-heavy {
+	background: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Subtle Glass for Cards */
+.glass-card {
+	background: rgba(255, 255, 255, 0.85);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border: 1px solid rgba(220, 214, 204, 0.3);
+	box-shadow: 0 8px 32px 0 rgba(74, 138, 98, 0.05);
+}
+
+/* Glass Navigation */
+.glass-nav {
+	background: rgba(255, 255, 255, 0.95);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+	border-bottom: 1px solid rgba(220, 214, 204, 0.5);
+}
+
+/* Gradient Overlays for Depth */
+.gradient-overlay {
+	position: relative;
+	overflow: hidden;
+}
+
+.gradient-overlay::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(135deg, rgba(74, 138, 98, 0.05) 0%, rgba(217, 137, 96, 0.05) 100%);
+	pointer-events: none;
+}
+
+/* Grid Layouts with Consistent Gaps */
+.grid-responsive {
+	display: grid;
+	grid-template-columns: repeat(1, minmax(0, 1fr));
+	gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+	.grid-responsive {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 1024px) {
+	.grid-responsive {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 1280px) {
+	.grid-responsive {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+}
+
+.grid-responsive-dense {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1rem;
+}
+
+@media (min-width: 640px) {
+	.grid-responsive-dense {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 768px) {
+	.grid-responsive-dense {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 1024px) {
+	.grid-responsive-dense {
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 1280px) {
+	.grid-responsive-dense {
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+	}
+}
+
+/* Form Spacing */
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.form-section {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+/* Improved Animations */
+@keyframes slide-up-fade-in {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.animate-slide-up {
+	animation: slide-up-fade-in 0.3s ease-out;
+}
+
+/* Pulse animation for attention */
+@keyframes pulse-subtle {
+	0%, 100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.85;
+	}
+}
+
+.animate-pulse-subtle {
+	animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Shimmer loading effect */
+@keyframes shimmer {
+	0% {
+		background-position: -1000px 0;
+	}
+	100% {
+		background-position: 1000px 0;
+	}
+}
+
+.animate-shimmer {
+	background: linear-gradient(
+		90deg,
+		hsl(var(--muted)) 0%,
+		hsl(var(--muted-foreground) / 0.1) 50%,
+		hsl(var(--muted)) 100%
+	);
+	background-size: 1000px 100%;
+	animation: shimmer 2s infinite;
+}
+
+/* Smooth scale on hover */
+.hover-scale {
+	transition: transform 0.2s ease-in-out;
+}
+
+.hover-scale:hover {
+	transform: scale(1.05);
+}
+
+/* Smooth gradient text */
+.gradient-text {
+	background: linear-gradient(
+		135deg,
+		hsl(var(--primary)) 0%,
+		hsl(var(--secondary)) 100%
+	);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+/* Glass morphism effect */
+.glass-effect {
+	background: hsla(var(--background) / 0.8);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+}
+
+/* Smooth transitions for all interactive elements */
+button, a, [role="button"] {
+	transition: all 0.2s ease-in-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+	background: hsl(var(--muted-foreground) / 0.3);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: hsl(var(--muted-foreground) / 0.5);
+}

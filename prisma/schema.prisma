@@ -1,0 +1,349 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// USER MANAGEMENT
+// ============================================================================
+
+model User {
+  id              String   @id @default(cuid())
+  whopUserId      String   @unique // Whop user ID
+  whopUsername    String
+  displayName     String?
+  email           String   @unique
+  phoneNumber     String?
+  avatarUrl       String?
+  bio             String?
+  
+  // Membership
+  membershipTier       MembershipTier  @default(BASIC)
+  subscriptionStatus   SubscriptionStatus @default(ACTIVE)
+  whopMembershipId     String?
+  
+  // Relations
+  profilePhotos        ProfilePhoto[]
+  wardrobeItems        WardrobeItem[]
+  collections          Collection[]
+  swapRequestsMade     SwapRequest[]   @relation("RequesterSwaps")
+  swapRequestsReceived SwapRequest[]   @relation("OwnerSwaps")
+  creatorProfile       CreatorProfile?
+  friendshipsInitiated Friendship[]    @relation("InitiatedFriendships")
+  friendshipsReceived  Friendship[]    @relation("ReceivedFriendships")
+  
+  // Preferences (JSON)
+  preferences     Json     @default("{}")
+  privacySettings Json     @default("{}")
+  
+  // Timestamps
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  lastLoginAt     DateTime @default(now())
+  
+  @@index([email])
+  @@index([whopUserId])
+}
+
+enum MembershipTier {
+  BASIC
+  STANDARD
+  PRO
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  TRIAL
+}
+
+model ProfilePhoto {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  url         String
+  type        PhotoType
+  isDefault   Boolean  @default(false)
+  consentForAI Boolean @default(false)
+  uploadedAt  DateTime @default(now())
+  
+  @@index([userId])
+}
+
+enum PhotoType {
+  HEADSHOT
+  FULL_BODY
+}
+
+// ============================================================================
+// WARDROBE & ITEMS
+// ============================================================================
+
+model WardrobeItem {
+  id                   String    @id @default(cuid())
+  ownerId              String
+  owner                User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  originalUploaderId   String
+  
+  // Item details
+  title                String
+  description          String?
+  category             ClothingCategory
+  subcategory          String?
+  brand                String?
+  size                 String
+  color                String[]
+  condition            ItemCondition
+  
+  // Images
+  images               ItemImage[]
+  
+  // Availability
+  status               ItemStatus     @default(AVAILABLE)
+  availableForSwap     Boolean        @default(true)
+  availableForSale     Boolean        @default(false)
+  salePrice            Float?
+  
+  // Provenance
+  history              ItemHistoryEvent[]
+  swapCount            Int            @default(0)
+  
+  // Metadata
+  tags                 String[]
+  estimatedValue       Float?
+  
+  // Relations
+  collections          CollectionItem[]
+  swapRequests         SwapRequest[]
+  
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  
+  @@index([ownerId])
+  @@index([category])
+  @@index([status])
+}
+
+enum ClothingCategory {
+  TOPS
+  BOTTOMS
+  DRESSES
+  OUTERWEAR
+  SHOES
+  ACCESSORIES
+  BAGS
+  JEWELRY
+}
+
+enum ItemCondition {
+  NEW
+  LIKE_NEW
+  GOOD
+  FAIR
+}
+
+enum ItemStatus {
+  AVAILABLE
+  ON_LOAN
+  IN_TRANSIT
+  UNAVAILABLE
+}
+
+model ItemImage {
+  id        String       @id @default(cuid())
+  itemId    String
+  item      WardrobeItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  url       String
+  isPrimary Boolean      @default(false)
+  uploadedAt DateTime    @default(now())
+  
+  @@index([itemId])
+}
+
+model ItemHistoryEvent {
+  id                String       @id @default(cuid())
+  itemId            String
+  item              WardrobeItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  timestamp         DateTime     @default(now())
+  type              HistoryEventType
+  anonymizedUserId  String       // Hashed user ID for privacy
+  notes             String?
+  
+  @@index([itemId])
+}
+
+enum HistoryEventType {
+  UPLOAD
+  SWAP
+  REPAIR
+  UPCYCLE
+  SALE
+}
+
+// ============================================================================
+// COLLECTIONS
+// ============================================================================
+
+model Collection {
+  id             String           @id @default(cuid())
+  userId         String
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name           String
+  description    String?
+  isPublic       Boolean          @default(false)
+  coverImageUrl  String?
+  tags           String[]
+  
+  items          CollectionItem[]
+  
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  
+  @@index([userId])
+  @@index([isPublic])
+}
+
+model CollectionItem {
+  id           String       @id @default(cuid())
+  collectionId String
+  collection   Collection   @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  itemId       String
+  item         WardrobeItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  order        Int          @default(0)
+  addedAt      DateTime     @default(now())
+  
+  @@unique([collectionId, itemId])
+  @@index([collectionId])
+  @@index([itemId])
+}
+
+// ============================================================================
+// SWAP REQUESTS
+// ============================================================================
+
+model SwapRequest {
+  id               String        @id @default(cuid())
+  requesterId      String
+  requester        User          @relation("RequesterSwaps", fields: [requesterId], references: [id], onDelete: Cascade)
+  ownerId          String
+  owner            User          @relation("OwnerSwaps", fields: [ownerId], references: [id], onDelete: Cascade)
+  itemId           String
+  item             WardrobeItem  @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  
+  status           SwapStatus    @default(PENDING)
+  
+  // Logistics
+  deliveryMethod   DeliveryMethod
+  meetupLocation   Json?         // Location object
+  scheduledPickup  DateTime?
+  scheduledReturn  DateTime?
+  
+  // Deposit
+  depositAmount    Float?
+  depositPaid      Boolean       @default(false)
+  depositRefunded  Boolean       @default(false)
+  
+  // Messages
+  messages         SwapMessage[]
+  
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  completedAt      DateTime?
+  
+  @@index([requesterId])
+  @@index([ownerId])
+  @@index([itemId])
+  @@index([status])
+}
+
+enum SwapStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  COMPLETED
+  CANCELED
+}
+
+enum DeliveryMethod {
+  IN_PERSON
+  DRIVER
+  LOCKER
+}
+
+model SwapMessage {
+  id        String      @id @default(cuid())
+  swapId    String
+  swap      SwapRequest @relation(fields: [swapId], references: [id], onDelete: Cascade)
+  senderId  String
+  content   String
+  timestamp DateTime    @default(now())
+  
+  @@index([swapId])
+}
+
+// ============================================================================
+// CREATOR PROFILES & MARKETPLACE
+// ============================================================================
+
+model CreatorProfile {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  storeName        String
+  storeDescription String?
+  storeBannerUrl   String?
+  storeLogoUrl     String?
+  customDomain     String?  @unique
+  
+  // Stripe
+  stripeAccountId  String?  @unique
+  stripeOnboarded  Boolean  @default(false)
+  
+  // Stats
+  totalSales       Int      @default(0)
+  rating           Float    @default(0)
+  reviewCount      Int      @default(0)
+  
+  isActive         Boolean  @default(true)
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  @@index([userId])
+}
+
+// ============================================================================
+// SOCIAL FEATURES
+// ============================================================================
+
+model Friendship {
+  id          String         @id @default(cuid())
+  requesterId String
+  requester   User           @relation("InitiatedFriendships", fields: [requesterId], references: [id], onDelete: Cascade)
+  receiverId  String
+  receiver    User           @relation("ReceivedFriendships", fields: [receiverId], references: [id], onDelete: Cascade)
+  status      FriendshipStatus @default(PENDING)
+  createdAt   DateTime       @default(now())
+  acceptedAt  DateTime?
+  
+  @@unique([requesterId, receiverId])
+  @@index([requesterId])
+  @@index([receiverId])
+  @@index([status])
+}
+
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
+  BLOCKED
+}
+

@@ -1,0 +1,35 @@
+# Sitemap
+https://universalclothingexchange.com/sitemap.xml
+
+# User agents
+User-agent: *
+Allow: /
+Allow: /marketplace
+Allow: /creators/*
+Allow: /about
+Allow: /help
+Allow: /blog/*
+
+# Disallow private/user pages
+Disallow: /wardrobe
+Disallow: /messages
+Disallow: /settings
+Disallow: /swaps
+Disallow: /api/*
+Disallow: /admin/*
+
+# Crawl delay (be gentle)
+Crawl-delay: 1
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Disallow: /api/*
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Disallow: /api/*
+
+# Sitemap location
+Sitemap: https://universalclothingexchange.com/sitemap.xml
