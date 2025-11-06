@@ -6,6 +6,7 @@
 		"dev": "next dev --turbopack",
 		"dev:whop": "whop-proxy --command 'next dev --turbopack'",
 		"build": "next build",
+		"build:analyze": "ANALYZE=true next build",
 		"start": "next start",
 		"lint": "biome lint",
 		"test": "vitest",
@@ -14,7 +15,9 @@
 		"test:e2e": "playwright test",
 		"test:e2e:ui": "playwright test --ui",
 		"test:e2e:debug": "playwright test --debug",
-		"type-check": "tsc --noEmit"
+		"type-check": "tsc --noEmit",
+		"lighthouse": "lighthouse http://localhost:3000 --view --output html --output-path ./lighthouse-report.html",
+		"perf:analyze": "pnpm run build:analyze && pnpm run lighthouse"
 	},
 	"dependencies": {
 		"@google/generative-ai": "^0.24.1",
@@ -41,6 +44,7 @@
 		"@axe-core/react": "^4.11.0",
 		"@biomejs/biome": "2.2.6",
 		"@mswjs/http-middleware": "^0.10.3",
+		"@next/bundle-analyzer": "^16.0.1",
 		"@playwright/test": "^1.56.1",
 		"@tailwindcss/postcss": "^4.1.14",
 		"@testing-library/jest-dom": "^6.9.1",
@@ -59,13 +63,16 @@
 		"happy-dom": "^20.0.10",
 		"jest-axe": "^10.0.0",
 		"jsdom": "^27.1.0",
+		"lighthouse": "^13.0.1",
 		"msw": "^2.12.0",
 		"playwright": "^1.56.1",
+		"playwright-lighthouse": "^4.0.0",
 		"prisma": "^6.18.0",
 		"tailwindcss": "^4.1.14",
 		"tailwindcss-animate": "^1.0.7",
 		"typescript": "^5.9.3",
-		"vitest": "^4.0.7"
+		"vitest": "^4.0.7",
+		"web-vitals": "^5.1.0"
 	},
 	"packageManager": "pnpm@9.15.9+sha512.68046141893c66fad01c079231128e9afb89ef87e2691d69e4d40eee228988295fd4682181bae55b58418c3a253bde65a505ec7c5f9403ece5cc3cd37dcf2531",
 	"pnpm": {
