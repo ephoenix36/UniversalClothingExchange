@@ -1,4 +1,3 @@
-import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -6,18 +5,15 @@ import { Settings as SettingsIcon, User, Bell, Lock, Palette } from "lucide-reac
 
 export default function SettingsPage() {
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-background via-background to-accent">
-			<Navigation />
-			
-			<div className="container-spacing section-spacing max-w-4xl mx-auto">
-				<div className="mb-12">
-					<h1 className="heading-xl mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-						Settings
-					</h1>
-					<p className="body-lg text-muted-foreground">
-						Manage your account preferences and settings
-					</p>
-				</div>
+		<div className="container-spacing section-spacing max-w-4xl mx-auto">
+			<div className="mb-12">
+				<h1 className="heading-xl mb-4 bg-gradient-to-r from-[#4a8a62] to-[#d98960] bg-clip-text text-transparent">
+					Settings
+				</h1>
+				<p className="body-lg text-muted-foreground">
+					Manage your account preferences and settings
+				</p>
+			</div>
 
 				{/* Settings Sections */}
 				<div className="space-y-6">
@@ -71,13 +67,12 @@ export default function SettingsPage() {
 								</div>
 								<div>
 									<CardTitle className="heading-sm">Appearance</CardTitle>
-									<CardDescription className="body-sm">Customize the look and feel</CardDescription>
-								</div>
-							</div>
-						</CardHeader>
-					</Card>
-				</div>
-			</div>
+							<CardDescription className="body-sm">Customize the look and feel</CardDescription>
+						</div>
+					</div>
+				</CardHeader>
+			</Card>
 		</div>
+	</div>
 	);
 }

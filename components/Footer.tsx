@@ -15,7 +15,7 @@ export default function Footer() {
                 Universal Clothing Exchange
               </span>
             </Link>
-            <p className="text-muted-foreground mb-4 max-w-md">
+            <p className="text-[#5a4d41] mb-4 max-w-md leading-relaxed">
               Join the circular fashion revolution. Share your wardrobe, discover unique pieces, 
               and reduce waste—all while building community.
             </p>
@@ -46,25 +46,25 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-foreground mb-4">Quick Links</h3>
+            <h3 className="font-semibold text-[#2d2520] mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/discover" className="text-muted-foreground hover:text-[#4a8a62] transition-colors">
+                <Link href="/discover" className="text-[#5a4d41] hover:text-[#4a8a62] transition-colors">
                   Discover
                 </Link>
               </li>
               <li>
-                <Link href="/wardrobe" className="text-muted-foreground hover:text-[#4a8a62] transition-colors">
+                <Link href="/wardrobe" className="text-[#5a4d41] hover:text-[#4a8a62] transition-colors">
                   My Wardrobe
                 </Link>
               </li>
               <li>
-                <Link href="/swaps" className="text-muted-foreground hover:text-[#4a8a62] transition-colors">
+                <Link href="/swaps" className="text-[#5a4d41] hover:text-[#4a8a62] transition-colors">
                   My Swaps
                 </Link>
               </li>
               <li>
-                <Link href="/profile" className="text-muted-foreground hover:text-[#4a8a62] transition-colors">
+                <Link href="/profile" className="text-[#5a4d41] hover:text-[#4a8a62] transition-colors">
                   Profile
                 </Link>
               </li>
@@ -73,25 +73,25 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="font-semibold text-foreground mb-4">Support</h3>
+            <h3 className="font-semibold text-[#2d2520] mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/help" className="text-muted-foreground hover:text-[#4a8a62] transition-colors">
+                <Link href="/help" className="text-[#5a4d41] hover:text-[#4a8a62] transition-colors">
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-muted-foreground hover:text-[#4a8a62] transition-colors">
+                <Link href="/about" className="text-[#5a4d41] hover:text-[#4a8a62] transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-muted-foreground hover:text-[#4a8a62] transition-colors">
+                <Link href="/terms" className="text-[#5a4d41] hover:text-[#4a8a62] transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-muted-foreground hover:text-[#4a8a62] transition-colors">
+                <Link href="/privacy" className="text-[#5a4d41] hover:text-[#4a8a62] transition-colors">
                   Privacy Policy
                 </Link>
               </li>
@@ -100,12 +100,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
+        <div className="mt-12 pt-8 border-t border-[#d4cec4] flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-[#5a4d41]">
             © {new Date().getFullYear()} Universal Clothing Exchange. All rights reserved.
           </p>
-          <p className="text-sm text-muted-foreground flex items-center gap-1">
-            Made with <Heart className="w-4 h-4 text-destructive fill-current" /> for sustainable fashion
+          <p className="text-sm text-[#5a4d41] flex items-center gap-1">
+            Made with <Heart className="w-4 h-4 text-[#c95945] fill-current" /> for sustainable fashion
           </p>
         </div>
       </div>

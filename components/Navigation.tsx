@@ -8,17 +8,11 @@ import { useState } from "react";
 import Logo from "./Logo";
 
 const navigation = [
-  { 
-    name: "Home", 
-    href: "/", 
-    icon: Home,
-    submenu: [
-      { name: "Messages", href: "/messages", icon: MessageCircle },
-    ]
-  },
+  { name: "Home", href: "/", icon: Home },
   { name: "Wardrobe", href: "/wardrobe", icon: Shirt },
   { name: "Discover", href: "/discover", icon: Sparkles },
   { name: "Swaps", href: "/swaps", icon: Heart },
+  { name: "Messages", href: "/messages", icon: MessageCircle },
   { 
     name: "Profile", 
     href: "/profile", 

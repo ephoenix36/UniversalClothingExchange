@@ -1,4 +1,3 @@
-import Navigation from "@/components/Navigation";
 import PageHeader from "@/components/PageHeader";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,8 +9,6 @@ import Footer from "@/components/Footer";
 export default function DiscoverPage() {
 	return (
 		<div className="min-h-screen flex flex-col bg-gradient-to-br from-[#f9f7f4] via-[#f2ede6] to-[#eae4d6]">
-			<Navigation />
-			
 			<div className="container-spacing section-spacing max-w-7xl mx-auto flex-grow">
 				<PageHeader
 					title="Discover Amazing Pieces"
@@ -20,32 +17,32 @@ export default function DiscoverPage() {
 
 				{/* Featured Stats */}
 				<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-					<Card className="card-interactive">
+					<Card className="card-interactive bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
 						<CardContent className="pt-6 text-center">
 							<Sparkles className="w-8 h-8 mx-auto mb-2 text-[#4a8a62]" />
-							<div className="text-2xl font-bold text-foreground">2,847</div>
-							<div className="body-sm text-muted-foreground">Items Available</div>
+							<div className="text-2xl font-bold text-gray-900">2,847</div>
+							<div className="body-sm text-gray-600">Items Available</div>
 						</CardContent>
 					</Card>
-					<Card className="card-interactive">
+					<Card className="card-interactive bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
 						<CardContent className="pt-6 text-center">
 							<Users className="w-8 h-8 mx-auto mb-2 text-[#4a8a62]" />
-							<div className="text-2xl font-bold text-foreground">1,203</div>
-							<div className="body-sm text-muted-foreground">Active Members</div>
+							<div className="text-2xl font-bold text-gray-900">1,203</div>
+							<div className="body-sm text-gray-600">Active Members</div>
 						</CardContent>
 					</Card>
-					<Card className="card-interactive">
+					<Card className="card-interactive bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
 						<CardContent className="pt-6 text-center">
 							<Heart className="w-8 h-8 mx-auto mb-2 text-[#c95945]" />
-							<div className="text-2xl font-bold text-foreground">8,421</div>
-							<div className="body-sm text-muted-foreground">Successful Swaps</div>
+							<div className="text-2xl font-bold text-gray-900">8,421</div>
+							<div className="body-sm text-gray-600">Successful Swaps</div>
 						</CardContent>
 					</Card>
-					<Card className="card-interactive">
+					<Card className="card-interactive bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
 						<CardContent className="pt-6 text-center">
 							<TrendingUp className="w-8 h-8 mx-auto mb-2 text-[#3a7550]" />
-							<div className="text-2xl font-bold text-foreground">92%</div>
-							<div className="body-sm text-muted-foreground">Satisfaction Rate</div>
+							<div className="text-2xl font-bold text-gray-900">92%</div>
+							<div className="body-sm text-gray-600">Satisfaction Rate</div>
 						</CardContent>
 					</Card>
 				</div>
@@ -71,25 +68,25 @@ export default function DiscoverPage() {
 						{ name: "Cashmere Sweater", size: "L", condition: "Good", category: "Tops", type: "sweater" as const },
 						{ name: "High-Waisted Jeans", size: "28", condition: "Like New", category: "Bottoms", type: "jeans" as const },
 					].map((item, idx) => (
-						<Card key={idx} className="card-interactive overflow-hidden group hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
-							<div className="aspect-square overflow-hidden">
+						<Card key={idx} className="card-interactive overflow-hidden group hover:shadow-xl hover:scale-[1.02] transition-all duration-300 bg-white border-gray-200">
+							<div className="aspect-square overflow-hidden bg-gray-100">
 								<ClothingPlaceholder type={item.type} className="group-hover:scale-110 transition-transform duration-300" />
 							</div>
-							<CardHeader className="card-spacing">
+							<CardHeader className="card-spacing pb-2">
 								<div className="flex items-start justify-between gap-2">
-									<CardTitle className="heading-sm text-base group-hover:text-[#4a8a62] transition-colors">{item.name}</CardTitle>
+									<CardTitle className="heading-sm text-base group-hover:text-[#4a8a62] transition-colors text-gray-900">{item.name}</CardTitle>
 									<Badge 
 										variant="secondary" 
 										className={`text-xs ${
-											item.condition === 'New' ? 'bg-[#3a7550]/10 text-[#3a7550] border-[#3a7550]/20' :
-											item.condition === 'Like New' ? 'bg-[#4a8a62]/10 text-[#4a8a62] border-[#4a8a62]/20' :
-											'bg-muted text-muted-foreground'
+											item.condition === 'New' ? 'bg-green-100 text-green-700 border-green-200' :
+											item.condition === 'Like New' ? 'bg-blue-100 text-blue-700 border-blue-200' :
+											'bg-yellow-100 text-yellow-700 border-yellow-200'
 										}`}
 									>
 										{item.condition}
 									</Badge>
 								</div>
-								<CardDescription className="body-sm">
+								<CardDescription className="body-sm text-gray-600">
 									{item.category} • Size {item.size}
 								</CardDescription>
 							</CardHeader>

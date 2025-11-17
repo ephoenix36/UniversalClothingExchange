@@ -85,7 +85,7 @@ export async function GET(request: NextRequest) {
  */
 export async function POST(request: NextRequest) {
   try {
-    const { whopUserId } = await authenticateRequest(whopsdk, await headers());
+    const { userId: whopUserId } = await whopsdk.verifyUserToken(await headers());
     
     // Find user
     const user = await prisma.user.findUnique({

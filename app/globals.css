@@ -1,4 +1,4 @@
-@layer theme, base, frosted_ui, components, utilities;
+@layer theme, base, frosted_ui, components, utilities, animations;
 
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
@@ -16,7 +16,7 @@
 :root {
 	/* Base Colors - Clean & Natural */
 	--background: 42 33% 97%;              /* Warm off-white #f9f7f4 */
-	--foreground: 20 25% 20%;              /* Deeper earth brown #372e28 - Better contrast */
+	--foreground: 20 25% 15%;              /* Much darker for readability #2d2520 */
 	
 	/* Primary Brand - Sage Green (Sustainability) */
 	--primary: 142 35% 45%;                /* Sage green #4a8a62 */
@@ -24,15 +24,15 @@
 	
 	/* Secondary Accent - Terracotta/Clay */
 	--secondary: 18 60% 60%;               /* Warm terracotta #d98960 */
-	--secondary-foreground: 20 25% 20%;    /* Dark text on secondary */
+	--secondary-foreground: 20 25% 15%;    /* Dark text on secondary */
 	
 	/* Muted/Subtle Elements */
 	--muted: 40 25% 92%;                   /* Light beige #f2ede6 */
-	--muted-foreground: 25 20% 40%;        /* Darker brown #6b5d50 - Better contrast */
+	--muted-foreground: 25 30% 30%;        /* Much darker for readability #5a4d41 */
 	
 	/* Accent Highlights - Soft Earth Tones */
 	--accent: 45 40% 88%;                  /* Soft sand #eae4d6 */
-	--accent-foreground: 142 35% 35%;      /* Deep sage for accent text */
+	--accent-foreground: 142 35% 30%;      /* Darker sage for better contrast */
 	
 	/* Destructive/Error States */
 	--destructive: 10 70% 55%;             /* Natural red-clay #c95945 */
@@ -44,16 +44,16 @@
 	
 	/* Warning States - Amber/Honey */
 	--warning: 38 85% 55%;                 /* Warm amber #e4a336 */
-	--warning-foreground: 20 25% 20%;      /* Dark text on amber */
+	--warning-foreground: 20 25% 15%;      /* Darker text on amber */
 	
 	/* Borders & Separators */
-	--border: 40 20% 85%;                  /* Soft beige border #dcd6cc */
+	--border: 40 20% 80%;                  /* Slightly darker border #d4cec4 */
 	--input: 40 20% 85%;                   /* Input border */
 	--ring: 142 35% 45%;                   /* Focus ring (sage green) */
 	
 	/* Card Backgrounds */
 	--card: 0 0% 100%;                     /* Pure white cards */
-	--card-foreground: 20 25% 20%;         /* Dark text on cards */
+	--card-foreground: 20 25% 15%;         /* Darker text on cards */
 	
 	/* Popover/Modal Backgrounds */
 	--popover: 0 0% 100%;
@@ -512,4 +512,54 @@ button, a, [role="button"] {
 
 ::-webkit-scrollbar-thumb:hover {
 	background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* ============================================
+   CUSTOM ANIMATIONS & TRANSITIONS
+   ============================================ */
+
+@layer animations {
+	/* Gradient Animation */
+	@keyframes gradient {
+		0%, 100% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+	}
+
+	.animate-gradient {
+		animation: gradient 6s ease infinite;
+	}
+
+	/* Fade in animation */
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.animate-fade-in {
+		animation: fadeIn 0.6s ease-out forwards;
+	}
+
+	/* Pulse glow animation */
+	@keyframes pulseGlow {
+		0%, 100% {
+			opacity: 0.3;
+		}
+		50% {
+			opacity: 0.6;
+		}
+	}
+
+	.animate-pulse-glow {
+		animation: pulseGlow 3s ease-in-out infinite;
+	}
 }

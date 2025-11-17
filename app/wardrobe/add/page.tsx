@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -142,23 +141,20 @@ export default function AddItemPage() {
 	};
 
 	return (
-		<div className="min-h-screen bg-background">
-			<Navigation />
-			
-			<main className="pb-20 md:pb-8">
-				<div className="max-w-4xl mx-auto px-4 py-8">
-					{/* Header */}
-					<div className="mb-8">
-						<Link href="/wardrobe">
-							<Button variant="ghost" size="sm" className="mb-4">
-								<ArrowLeft className="w-4 h-4 mr-2" />
-								Back to Wardrobe
-							</Button>
-						</Link>
-						
-						<h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
-							Add New Item
-						</h1>
+		<div className="pb-20 md:pb-8">
+			<div className="max-w-4xl mx-auto px-4 py-8">
+				{/* Header */}
+				<div className="mb-8">
+					<Link href="/wardrobe">
+						<Button variant="ghost" size="sm" className="mb-4">
+							<ArrowLeft className="w-4 h-4 mr-2" />
+							Back to Wardrobe
+						</Button>
+					</Link>
+					
+					<h1 className="text-4xl font-bold bg-gradient-to-r from-[#4a8a62] to-[#d98960] bg-clip-text text-transparent mb-2">
+						Add New Item
+					</h1>
 						<p className="text-lg text-muted-foreground">
 							Share an item from your wardrobe to swap or sell
 						</p>
@@ -561,8 +557,7 @@ export default function AddItemPage() {
 							</Link>
 						</div>
 					</form>
-				</div>
-			</main>
+			</div>
 		</div>
 	);
 }
